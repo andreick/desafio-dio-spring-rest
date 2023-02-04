@@ -1,0 +1,16 @@
+INSERT INTO clientes VALUES (default, 'Jorge', '70343-450','EQS 104/304','','Asa Sul','Brasília','DF', true);
+INSERT INTO clientes VALUES (default, 'Alberto', '29144-455','Rua Dom Pedro II','','Campina Grande','Cariacica','ES', false);
+INSERT INTO clientes VALUES (default, 'Eduardo', '41250-030', 'Travessa Jair','','São Marcos','Salvador','BA', true);
+INSERT INTO clientes VALUES (default, 'Haroldo', '29176-298', 'Rua Viana', '', 'Maria Níobe', 'Serra', 'ES', true);
+INSERT INTO clientes VALUES (default, 'Pedro', '49080-050', 'Rua Alzira Rezende', '', 'América', 'Aracaju', 'SE', true);
+INSERT INTO clientes VALUES (default, 'Jean', '81930-106', 'Rua Cezlau Alexandre Sarnacki', '', 'Umbará', 'Curitiba', 'PR', true);
+INSERT INTO clientes VALUES (default, 'Jefferson', '60863-355', 'Rua Elane Cavalcante', '', 'Barroso', 'Fortaleza', 'CE', true);
+INSERT INTO clientes VALUES (default, 'Maria', '79115-383', 'Rua Assis Salamene', '', 'Residencial Sírio Libanês I', 'Campo Grande', 'MS', true);
+INSERT INTO clientes VALUES (default, 'David', '07809-190', 'Rua das Violetas', '', 'Parque Santa Delfa', 'Franco da Rocha', 'SP' , true);
+INSERT INTO clientes VALUES (default, 'Carlos', '36200-098', 'Rua Felipe Paulo Curi', '', 'Centro', 'Barbacena', 'MG', true);
+INSERT INTO clientes VALUES (default, 'James',  '95020-901', 'Rua Sinimbu', '2019', 'Centro', 'Caxias do Sul', 'RS', true);
+INSERT INTO clientes VALUES (default, 'Helena', '57063-058', 'Rua E', '(Lot Sombra dos Eucaliptos)', 'Santa Amélia', 'Maceió', 'AL', true);
+INSERT INTO clientes VALUES (default, 'Laura', '66032-465', 'Vila Jesus de Nazaré', '', 'Condor', 'Belém', 'PA', false);
+INSERT INTO clientes VALUES (default, 'Rafael', '85503-378', 'Rodovia PR-493', '', 'Fraron', 'Pato Branco', 'PR', true);
+INSERT INTO clientes VALUES (default, 'Henrique', '68557-824', 'Rua Dez', '', 'Jardim América', 'Xinguara', 'PA', true);
+INSERT INTO clientes VALUES (default, 'Sara', '68903-877', 'Passagem das Graças', '', 'Araxá', 'Macapá', 'AP', true);
