@@ -17,9 +17,11 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
     @Embedded
+    @Column(nullable = false)
     private Endereco endereco;
 
     private boolean ativo;

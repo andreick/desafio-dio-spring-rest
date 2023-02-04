@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class ClienteController {
     private ClienteMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ClienteDetailsDto> create(@RequestBody ClienteCreateDto dto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ClienteDetailsDto> create(@RequestBody @Valid ClienteCreateDto dto, UriComponentsBuilder uriBuilder) {
         var cliente = mapper.toCliente(dto);
         cliente = clienteService.save(cliente);
         var uri = uriBuilder.path("/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
@@ -40,7 +41,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteDetailsDto> update(@PathVariable Long id, @RequestBody ClienteUpdateDto dto) {
+    public ResponseEntity<ClienteDetailsDto> update(@PathVariable Long id, @RequestBody @Valid ClienteUpdateDto dto) {
         var cliente = mapper.toCliente(dto);
         cliente = clienteService.update(id, cliente);
         return ResponseEntity.ok(new ClienteDetailsDto(cliente));
