@@ -4,10 +4,10 @@ import com.andreick.gof.model.Cliente;
 import com.andreick.gof.repository.ClienteRepository;
 import com.andreick.gof.service.endereco.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class ClienteService {
@@ -28,8 +28,8 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public List<Cliente> findAllAtivo() {
-        return clienteRepository.findAllByAtivoTrue();
+    public Page<Cliente> findAllAtivo(Pageable pageable) {
+        return clienteRepository.findAllByAtivoTrue(pageable);
     }
 
     public Cliente findById(Long id) {

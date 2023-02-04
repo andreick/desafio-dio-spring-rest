@@ -3,12 +3,14 @@ package com.andreick.gof.controller;
 import com.andreick.gof.dto.cliente.*;
 import com.andreick.gof.service.cliente.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
@@ -29,9 +31,9 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClienteDetailsDto>> getAll() {
-        var clientes = clienteService.findAllAtivo();
-        return ResponseEntity.ok(mapper.toClienteDetailsDtos(clientes));
+    public ResponseEntity<Page<ClienteDetailsDto>> getAll(@PageableDefault(size = 5, sort = {"nome", "id"}) Pageable pageable) {
+        var clientes = clienteService.findAllAtivo(pageable);
+        return ResponseEntity.ok(clientes.map(ClienteDetailsDto::new));
     }
 
     @GetMapping("/{id}")
