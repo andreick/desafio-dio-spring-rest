@@ -1,4 +1,4 @@
-package com.andreick.gof.model.viacep;
+package com.andreick.gof.dto.viacep;
 
 import lombok.Value;
 

@@ -1,4 +1,4 @@
-package com.andreick.gof.model.cliente;
+package com.andreick.gof.dto.cliente;
 
 import lombok.Value;
 

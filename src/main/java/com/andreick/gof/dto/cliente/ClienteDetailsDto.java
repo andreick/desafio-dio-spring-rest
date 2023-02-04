@@ -1,6 +1,7 @@
-package com.andreick.gof.model.cliente;
+package com.andreick.gof.dto.cliente;
 
-import com.andreick.gof.model.endereco.Endereco;
+import com.andreick.gof.model.Cliente;
+import com.andreick.gof.model.Endereco;
 import lombok.Value;
 
 @Value

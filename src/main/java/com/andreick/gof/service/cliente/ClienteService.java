@@ -1,11 +1,13 @@
 package com.andreick.gof.service.cliente;
 
-import com.andreick.gof.model.cliente.Cliente;
-import com.andreick.gof.model.cliente.ClienteCreateDto;
-import com.andreick.gof.model.cliente.ClienteRepository;
+import com.andreick.gof.model.Cliente;
+import com.andreick.gof.repository.ClienteRepository;
 import com.andreick.gof.service.endereco.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ClienteService {
@@ -16,13 +18,39 @@ public class ClienteService {
     @Autowired
     private EnderecoService enderecoService;
 
-    public Cliente save(ClienteCreateDto dto) {
-        var endereco = enderecoService.getEndereco(dto.getCep());
-        var cliente = new Cliente(dto, endereco);
+    @Transactional
+    public Cliente save(Cliente newCliente) {
+        var endereco = enderecoService.getEndereco(newCliente.getCep());
+        var cliente = newCliente.toBuilder()
+                .endereco(endereco)
+                .ativo(true)
+                .build();
         return clienteRepository.save(cliente);
+    }
+
+    public List<Cliente> findAllAtivo() {
+        return clienteRepository.findAllByAtivoTrue();
     }
 
     public Cliente findById(Long id) {
         return clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente com id " + id + " não encontrado"));
+    }
+
+    @Transactional
+    public Cliente update(Long id, Cliente updatedCliente) {
+        var cliente = findById(id);
+        if (!cliente.isAtivo()) throw new RuntimeException("Cliente inativo");
+        if (!cliente.getCep().equals(updatedCliente.getCep())) {
+            var endereco = enderecoService.getEndereco(updatedCliente.getCep());
+            updatedCliente = updatedCliente.toBuilder().endereco(endereco).build();
+        }
+        cliente.update(updatedCliente);
+        return cliente;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        var cliente = findById(id);
+        cliente.delete();
     }
 }
