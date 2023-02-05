@@ -40,7 +40,8 @@ public class ClienteService {
     public Cliente update(Long id, Cliente updatedCliente) {
         var cliente = findById(id);
         if (!cliente.isAtivo()) throw new RuntimeException("Cliente inativo");
-        if (!cliente.getCep().equals(updatedCliente.getCep())) {
+        boolean shouldGetEndereco = updatedCliente.getCep() != null && !updatedCliente.getCep().equals(cliente.getCep());
+        if (shouldGetEndereco) {
             var endereco = enderecoService.getEndereco(updatedCliente.getCep());
             updatedCliente = updatedCliente.toBuilder().endereco(endereco).build();
         }

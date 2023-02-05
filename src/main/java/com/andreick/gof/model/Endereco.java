@@ -36,4 +36,8 @@ public class Endereco {
     public Endereco(String cep) {
         this.cep = cep;
     }
+
+    public boolean isFilled() {
+        return logradouro != null && complemento != null && bairro != null && localidade != null && uf != null && cep != null;
+    }
 }

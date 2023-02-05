@@ -30,8 +30,12 @@ public class Cliente {
         return endereco != null ? endereco.getCep() : null;
     }
 
+    public boolean isEnderecoFilled() {
+        return endereco != null && endereco.isFilled();
+    }
+
     public void update(Cliente cliente) {
-        if (cliente.getEndereco() != null) endereco = cliente.getEndereco();
+        if (cliente.isEnderecoFilled()) endereco = cliente.getEndereco();
     }
 
     public void delete() {
