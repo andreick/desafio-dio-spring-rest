@@ -19,13 +19,10 @@ public class ClienteService {
     private EnderecoService enderecoService;
 
     @Transactional
-    public Cliente save(Cliente newCliente) {
+    public void save(Cliente newCliente) {
         var endereco = enderecoService.getEndereco(newCliente.getCep());
-        var cliente = newCliente.toBuilder()
-                .endereco(endereco)
-                .ativo(true)
-                .build();
-        return clienteRepository.save(cliente);
+        newCliente.setEndereco(endereco);
+        clienteRepository.save(newCliente);
     }
 
     public Page<Cliente> findAllAtivo(Pageable pageable) {
@@ -43,9 +40,8 @@ public class ClienteService {
         boolean shouldGetEndereco = updatedCliente.getCep() != null && !updatedCliente.getCep().equals(cliente.getCep());
         if (shouldGetEndereco) {
             var endereco = enderecoService.getEndereco(updatedCliente.getCep());
-            updatedCliente = updatedCliente.toBuilder().endereco(endereco).build();
+            cliente.setEndereco(endereco);
         }
-        cliente.update(updatedCliente);
         return cliente;
     }
 

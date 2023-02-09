@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Builder(toBuilder = true)
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,18 +24,17 @@ public class Cliente {
     @Column(nullable = false)
     private Endereco endereco;
 
-    private boolean ativo;
+    @Builder.Default
+    private boolean ativo = true;
 
     public String getCep() {
         return endereco != null ? endereco.getCep() : null;
     }
 
-    public boolean isEnderecoFilled() {
-        return endereco != null && endereco.isFilled();
-    }
-
-    public void update(Cliente cliente) {
-        if (cliente.isEnderecoFilled()) endereco = cliente.getEndereco();
+    public void setEndereco(Endereco endereco) {
+        if (endereco != null && endereco.isFilled()) {
+            this.endereco = endereco;
+        }
     }
 
     public void delete() {
